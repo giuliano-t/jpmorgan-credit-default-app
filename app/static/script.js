@@ -19,8 +19,7 @@ document.getElementById("predictForm").addEventListener("submit", async function
 
     const result = await response.json();
     const output = `
-        <p><strong>Default Probability:</strong> ${result.default_probability}%</p>
-        <p><strong>Will Default:</strong> ${result.will_default}</p>
+        <p><strong>Will it default?:</strong> ${result.will_default}</p>
     `;
     document.getElementById("result").innerHTML = output;
 });

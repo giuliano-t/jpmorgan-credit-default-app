@@ -6,6 +6,4 @@ __pycache__/
 credit-default-env/
 
 # Model files and large data
-models/
 *.csv
-*.pkl

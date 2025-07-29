@@ -46,7 +46,7 @@ def predict_default(data: InputData):
     prediction = model.predict_proba(input_array)[0][1]
     label = "Yes" if prediction > 0.75 else "No"
     return {
-        "Will it default?": label
+        "will_default": label
     }
 
 @app.get("/")
