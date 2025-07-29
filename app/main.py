@@ -44,10 +44,9 @@ def predict_default(data: InputData):
         data.fico_score
     ]])
     prediction = model.predict_proba(input_array)[0][1]
-    label = "yes" if prediction > 0.75 else "no"
+    label = "Yes" if prediction > 0.75 else "No"
     return {
-        "default_probability": round(float(prediction) * 100, 1),
-        "will_default": label
+        "Will it default?": label
     }
 
 @app.get("/")
