@@ -1,0 +1,6 @@
+credit_lines_outstanding
+loan_amt_outstanding
+total_debt_outstanding
+income
+years_employed
+fico_score

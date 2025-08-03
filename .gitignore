@@ -1,0 +1,9 @@
+# Python
+__pycache__/
+*.pyc
+
+# Virtual environments
+credit-default-env/
+
+# Model files and large data
+*.csv
