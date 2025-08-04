@@ -1,4 +1,4 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, Response
 from pydantic import BaseModel
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
@@ -9,34 +9,40 @@ import os
 
 app = FastAPI()
 
+# CORS middleware allowing all origins and methods
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],  # You can later restrict this to ["http://localhost:8000"] etc.
+    allow_origins=["*"],            # Change to your domain in production
     allow_credentials=True,
-    allow_methods=["GET", "POST", "OPTIONS"],
+    allow_methods=["*"],            # Allow all HTTP methods including OPTIONS
     allow_headers=["*"],
 )
 
-# Correct relative path from the root directory
-STATIC_DIR = os.path.join(os.path.dirname(__file__), "..", "static")
-INDEX_FILE = os.path.join(STATIC_DIR, "index.html")
+# Paths setup
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+STATIC_DIR = os.path.join(BASE_DIR, "..", "static")
+MODEL_PATH = os.path.join(BASE_DIR, "..", "models", "xgboost_model.pkl")
 
-# Mount static files
+# Mount static directory
 app.mount("/static", StaticFiles(directory=STATIC_DIR), name="static")
 
-# Serve the form at "/"
+# Serve index.html at root
 @app.get("/", response_class=FileResponse)
 def serve_index():
-    return FileResponse(INDEX_FILE)
+    return FileResponse(os.path.join(STATIC_DIR, "index.html"))
 
-# Health check
+# Health check endpoint
 @app.get("/health")
 def health():
     return {"status": "healthy", "model": "credit_default_xgboost_v1"}
 
+# Explicitly handle OPTIONS preflight for /predict
+@app.options("/predict")
+def options_predict():
+    return Response(status_code=200)
+
 # Load the model
-model_path = os.path.join(os.path.dirname(__file__), "..", "models", "xgboost_model.pkl")
-with open(model_path, "rb") as f:
+with open(MODEL_PATH, "rb") as f:
     model = pickle.load(f)
 
 # Input schema
@@ -48,7 +54,7 @@ class InputData(BaseModel):
     years_employed: float
     fico_score: float
 
-# Predict endpoint
+# Prediction endpoint
 @app.post("/predict")
 def predict_default(data: InputData):
     input_array = np.array([[ 
