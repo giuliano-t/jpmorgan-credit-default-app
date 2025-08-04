@@ -1,38 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" />
     <title>Credit Default Predictor</title>
-    <link rel="stylesheet" href="/static/style.css">
+    <link rel="stylesheet" href="/static/style.css" />
 </head>
 <body>
     <div class="container">
-        <h1>Credit Default Risk</h1>
+        <h1>Credit Default Risk Predictor</h1>
         <form id="predictForm">
-            <label>Credit Lines Outstanding:</label>
-            <input type="number" name="credit_lines_outstanding" step="0.1" required>
+            <!-- Credit Lines Outstanding -->
+            <label title="Number of open credit lines or accounts">
+                Credit Lines Outstanding (count):
+            </label>
+            <input
+                type="number"
+                name="credit_lines_outstanding"
+                step="0.1"
+                required
+                value="5"
+                placeholder="e.g. 5"
+            />
 
-            <label>Loan Amount Outstanding:</label>
-            <input type="number" name="loan_amt_outstanding" step="0.1" required>
+            <!-- Loan Amount Outstanding -->
+            <label title="Total loan amount currently owed in US dollars">
+                Loan Amount Outstanding (USD):
+            </label>
+            <input
+                type="number"
+                name="loan_amt_outstanding"
+                step="0.1"
+                required
+                value="20000"
+                placeholder="e.g. 20000"
+            />
 
-            <label>Total Debt Outstanding:</label>
-            <input type="number" name="total_debt_outstanding" step="0.1" required>
+            <!-- Total Debt Outstanding -->
+            <label title="Sum of all outstanding debts in US dollars">
+                Total Debt Outstanding (USD):
+            </label>
+            <input
+                type="number"
+                name="total_debt_outstanding"
+                step="0.1"
+                required
+                value="10000"
+                placeholder="e.g. 10000"
+            />
 
-            <label>Income:</label>
-            <input type="number" name="income" step="0.1" required>
+            <!-- Income -->
+            <label title="Annual income in US dollars">
+                Income (USD):
+            </label>
+            <input
+                type="number"
+                name="income"
+                step="0.1"
+                required
+                value="50000"
+                placeholder="e.g. 50000"
+            />
 
-            <label>Years Employed:</label>
-            <input type="number" name="years_employed" step="0.1" required>
+            <!-- Years Employed -->
+            <label title="Number of years employed at current job">
+                Years Employed (years):
+            </label>
+            <input
+                type="number"
+                name="years_employed"
+                step="0.1"
+                required
+                value="3"
+                placeholder="e.g. 3"
+            />
 
-            <label>FICO Score:</label>
-            <input type="number" name="fico_score" step="1" required>
+            <!-- FICO Score -->
+            <label title="Credit score between 300 and 850">
+                FICO Score (points):
+            </label>
+            <input
+                type="number"
+                name="fico_score"
+                step="1"
+                required
+                value="700"
+                placeholder="e.g. 700"
+                min="300"
+                max="850"
+            />
 
             <button type="submit">Predict</button>
+            <button type="reset" id="resetBtn">Reset</button>
         </form>
 
-        <div id="result"></div>
+        <!-- Loading message, hidden by default -->
+        <p id="loading" style="display:none;">Predicting, please wait...</p>
+
+        <!-- Prediction result -->
+        <div id="result-container" style="margin-top:1em;">
+            <h2>Prediction Result:</h2>
+            <div id="result"></div>
+        </div>
     </div>
 
     <script src="/static/script.js"></script>
+    <script>
+        // Show loading on submit, hide result
+        const form = document.getElementById("predictForm");
+        const loading = document.getElementById("loading");
+        const resultDiv = document.getElementById("result");
+        const resetBtn = document.getElementById("resetBtn");
+
+        form.addEventListener("submit", async function (e) {
+            e.preventDefault();
+            resultDiv.innerHTML = "";
+            loading.style.display = "block";
+
+            const formData = new FormData(e.target);
+            const payload = Object.fromEntries(formData.entries());
+
+            for (let key in payload) {
+                payload[key] = parseFloat(payload[key]);
+            }
+
+            try {
+                const response = await fetch("/predict", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify(payload),
+                });
+
+                const result = await response.json();
+                loading.style.display = "none";
+
+                const output = `<p><strong>Will it default?:</strong> ${result.will_default}</p>`;
+                resultDiv.innerHTML = output;
+            } catch (err) {
+                loading.style.display = "none";
+                resultDiv.innerHTML =
+                    "<p style='color:red;'>Error: Failed to get prediction. Please try again.</p>";
+            }
+        });
+
+        // Clear result on reset
+        resetBtn.addEventListener("click", () => {
+            resultDiv.innerHTML = "";
+            loading.style.display = "none";
+        });
+    </script>
 </body>
 </html>
