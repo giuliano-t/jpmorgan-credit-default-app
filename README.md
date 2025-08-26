@@ -32,8 +32,7 @@ For a detailed walkthrough of this process, please see the notebook located in t
 
 The best-performing model from the analysis was then deployed into a user-friendly web application for real-time credit risk assessment.
 
-![Screenshot of the Credit Default Prediction Web App](path/to/your/webapp_screenshot.png)
-*(Pro-tip: Add a screenshot of your web app here!)*
+![Screenshot of the Credit Default Prediction Web App](Pictures/My_Web_App_On_Render.png)
 
 ---
 
