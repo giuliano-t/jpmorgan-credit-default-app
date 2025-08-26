@@ -1,6 +1,6 @@
 # JP Morgan Credit Default Prediction: Analysis & Web App
 
-This repository contains a complete machine learning project designed to predict credit default risk, based on the JP Morgan Chase & Co. dataset from Kaggle.
+This repository contains a complete machine learning project designed to predict credit default risk, based on the JP Morgan Chase & Co. dataset from the Quantitative Research Virtual Internship (Task 3).
 
 The project is presented in two parts:
 1.  A detailed **Jupyter Notebook** showcasing the end-to-end process of model selection, tuning, and evaluation.
@@ -21,7 +21,7 @@ The goal of this project is to build a reliable model that can predict the proba
 Before building the final application, a rigorous analysis was conducted to find the best-performing model. This process is documented in a comprehensive Jupyter Notebook.
 
 * **In-Depth Model Comparison:** The analysis directly compares the performance of a classic **XGBoost** model against a **Deep Learning** model built with TensorFlow/Keras.
-* **Complete ML Workflow:** The notebook covers the entire data science lifecycle, including Exploratory Data Analysis (EDA), feature engineering, handling class imbalance, and hyperparameter tuning with KerasTuner.
+* **Complete ML Workflow:** The notebook covers the entire data science lifecycle, including Exploratory Data Analysis (EDA), feature engineering, handling class imbalance, and hyperparameter tuning.
 
 For a detailed walkthrough of this process, please see the notebook located in the `/analysis` folder:
 * **[Model Selection and Tuning Notebook](Model-Selection/Credit_Default_Prediction_Model_Selection_v01.ipynb)**
@@ -39,9 +39,9 @@ The best-performing model from the analysis was then deployed into a user-friend
 ## Skills & Technologies Demonstrated
 
 * **Machine Learning:** XGBoost, Deep Learning (TensorFlow/Keras), Classification Models
-* **Web Development:** Streamlit / Flask
+* **Web Development:** FastAPI
 * **Data Science:** Pandas, Scikit-learn, Matplotlib, Seaborn
-* **MLOps:** Model Serialization (Joblib/Pickle), Dependency Management (requirements.txt)
+* **MLOps:** Model Serialization (joblib), Dependency Management (requirements.txt), Docker
 
 ---
 
