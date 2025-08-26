@@ -6,8 +6,7 @@ The project is presented in two parts:
 1.  A detailed **Jupyter Notebook** showcasing the end-to-end process of model selection, tuning, and evaluation.
 2.  An **interactive web application** built from the final, chosen model for real-time risk prediction.
 
-![Model Performance Comparison Chart](path/to/your/model_comparison_plot.png)
-*(Pro-tip: Add the bar chart comparing your models here!)*
+![Model Performance Comparison Chart](Pictures/Model_Performance_Comparison.png)
 
 ---
 
