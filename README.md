@@ -24,7 +24,7 @@ Before building the final application, a rigorous analysis was conducted to find
 * **Complete ML Workflow:** The notebook covers the entire data science lifecycle, including Exploratory Data Analysis (EDA), feature engineering, handling class imbalance, and hyperparameter tuning with KerasTuner.
 
 For a detailed walkthrough of this process, please see the notebook located in the `/analysis` folder:
-* **[Model Selection and Tuning Notebook](./analysis/model_selection_and_tuning.ipynb)**
+* **[Model Selection and Tuning Notebook](Model_Selection/Credit_Default_Prediction_Model_Selection_v01.ipynb)**
 
 ---
 
