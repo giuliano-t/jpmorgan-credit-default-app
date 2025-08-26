@@ -61,5 +61,6 @@ pip install -r requirements.txt
 
 # Run the FastAPI server from the root directory
 uvicorn app.main:app --reload
+```
 
-# Once the server is running, you can access the web application by navigating to https://www.google.com/search?q=http://127.0.0.1:8000 in your web browser.
+Once the server is running, you can access the web application by navigating to https://www.google.com/search?q=http://127.0.0.1:8000 in your web browser.
