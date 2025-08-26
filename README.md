@@ -36,12 +36,12 @@ The best-performing model from the analysis was then deployed into a user-friend
 
 ---
 
-## Skills & Technologies Demonstrated
+### Skills & Technologies Demonstrated
 
-* **Machine Learning:** XGBoost, Deep Learning (TensorFlow/Keras), Classification Models
-* **Web Development:** FastAPI
-* **Data Science:** Pandas, Scikit-learn, Matplotlib, Seaborn
-* **MLOps:** Model Serialization (joblib), Dependency Management (requirements.txt), Docker
+* **Machine Learning:** Comparative analysis of **XGBoost** and a **Deep Learning** model (TensorFlow/Keras), optimized with **KerasTuner** for a classification task.
+* **Web Development:** A production-ready REST API built with **FastAPI** to serve real-time predictions.
+* **Data Science:** End-to-end analysis using **Pandas** for data manipulation and **Scikit-learn** for preprocessing and evaluation.
+* **MLOps:** Model serialization with **pickle**, dependency management via `requirements.txt`, containerization with **Docker**, and cloud deployment to **Render**.
 
 ---
 
